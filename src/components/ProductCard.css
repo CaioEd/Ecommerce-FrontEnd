@@ -1,0 +1,26 @@
+.product-card {
+    background-color: #e5e3e348;
+
+    width: 20rem;
+    height: 20rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    cursor: pointer;
+
+    transition: padding .5s;
+}
+
+.product-card:hover{
+    padding: .5rem;
+   
+}
+
+.product-card > img {
+    width: 10rem;
+    border-radius: 10px;
+
+}

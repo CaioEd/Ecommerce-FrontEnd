@@ -1,0 +1,17 @@
+.products-section{
+    width: 100%;
+}
+
+.products-section > h2{
+    font-size: 28px;
+
+    margin-left: 3rem;
+}
+
+.products-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2rem;
+}
