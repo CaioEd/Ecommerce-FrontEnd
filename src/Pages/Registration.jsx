@@ -9,30 +9,42 @@ const Registration = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [message, setMessage] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    fetch('http://127.0.0.1:8000/registration/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, email, password }),
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Error registering user')
+
+    if (password !== confirmPassword) {
+      setMessage('As senhas não coincidem!')
+    }
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/registration/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.success); // Exibir mensagem de sucesso
+
+        // Limpeza de formulário
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+      } else {
+        setMessage(data.error); // Exibir mensagem de erro
       }
-      return response.json()
-    })
-    .then((data) => {
-      console.log('Success:', data);
-      // Aqui você pode redirecionar ou mostrar uma mensagem de sucesso
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('Error:', error);
-      // Aqui você pode mostrar uma mensagem de erro
-    });
+      setMessage('Ocorreu um erro ao cadastrar. Tente novamente mais tarde.'); // Mensagem de erro 
+    }
   }
 
   return (
@@ -57,10 +69,11 @@ const Registration = () => {
             required placeholder="Senha" value={password}
             onChange={(e) => setPassword(e.target.value)}
             />
-            <input type="password" name="confirmPassword" id="confirmPassword" required placeholder="Confirme sua senha" />
+            <input type="password" name="confirmPassword" id="confirmPassword" required placeholder="Confirme sua senha"  />
             <button className="register-button">Cadastrar</button>
           </form>
 
+          {message && <p>{message}</p>}
           <span>
             <Link to="/login">Já possui uma conta? Faça login.</Link>
           </span>
