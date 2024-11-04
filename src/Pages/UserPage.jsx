@@ -1,8 +1,23 @@
+import { useEffect, useState } from 'react'
+
 import './UserPage.css'
 
 import Header from '../components/Header'
 
 const UserPage = () => {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const accessToken = localStorage.getItem('access_token')
+      if (!accessToken) {
+        return
+      }
+
+      const response = await fetch()
+    }
+  })
+  
   return (
     <>
         <Header/>

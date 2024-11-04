@@ -1,24 +1,38 @@
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
 import './ProductPage.css'
 
 import Header from '../components/Header'
 
 const ProductPage = () => {
+  const { id } = useParams() // ID da URL
+  const [product, setProduct] = useState(null)
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/products/${id}/`)
+        .then((response) => response.json())
+        .then((data) => setProduct(data))
+        .catch((error) => console.error('Error fetching product:', error))
+  }, [id])
+
+    if (!product) {
+        return <p>Carregando...</p>
+    }
+
   return (
     <>
         <Header/>
         <div className="productPage-container">
             <div className="product-title-img">
-                <h2>Comprar produto</h2>
-                <p>A partir de R$ 999</p>
-                <img src="https://cdn.pixabay.com/photo/2020/08/26/14/29/laptop-5519651_1280.jpg" alt="" />
+                <h2>{product.name}</h2>
+                <p>A partir de R$ {product.price}</p>
+                <img src={product.imageUrl} alt={product.title} />
             </div>
 
             <div className="product-description">
                 <h3>Descrição do produto:</h3>
-                <p>Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. <br /> Nostrum reprehenderit
-                    rem maxime quidem amet in ullam blanditiis.
-                </p>
+                <p>{product.description}</p>
                 <button>Adicionar ao carrinho</button>
             </div>
         </div>

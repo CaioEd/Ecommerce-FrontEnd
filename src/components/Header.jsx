@@ -11,9 +11,12 @@ const Header = () => {
             </Link>
             <div className="right-header">
                 <input type="text" className='search-input'  placeholder='Pesquisar'/>
-                <a href="/login">
+                <a href="/user">
                     <i className="bi bi-person-circle" style={{ fontSize: '30px' }}></i>
                 </a>
+                <Link to='/login'>
+                  <button>Login</button>                
+                </Link>
             </div>
     </div>
     </>

@@ -8,9 +8,7 @@ const Home = () => {
     <>
         <Header/>
 
-        <Products>
-        
-        </Products>
+        <Products></Products>
 
     </>
   )
