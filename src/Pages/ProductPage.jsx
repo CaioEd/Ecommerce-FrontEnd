@@ -27,7 +27,7 @@ const ProductPage = () => {
             <div className="product-title-img">
                 <h2>{product.name}</h2>
                 <p>A partir de R$ {product.price}</p>
-                <img src={product.imageUrl} alt={product.title} />
+                <img src={`http://127.0.0.1:8000/${product.image}`} alt={product.title} />
             </div>
 
             <div className="product-description">
