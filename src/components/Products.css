@@ -16,3 +16,12 @@
     width: 70%;
     margin: 0 auto;
 }
+
+.search-input {
+    margin: 2rem 0 0 2rem;
+    width: 15rem;
+    height: 1.7rem;
+
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.477);
+}

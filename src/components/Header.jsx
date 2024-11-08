@@ -10,9 +10,11 @@ const Header = () => {
               <h1>E-commerce</h1>
             </Link>
             <div className="right-header">
-                <input type="text" className='search-input'  placeholder='Pesquisar'/>
                 <a href="/user">
                     <i className="bi bi-person-circle" style={{ fontSize: '30px' }}></i>
+                </a>
+                <a href="/cart">
+                  <i className="bi bi-cart" style={{ fontSize: '30px' }}></i>
                 </a>
                 <Link to='/login'>
                   <button>Login</button>                
