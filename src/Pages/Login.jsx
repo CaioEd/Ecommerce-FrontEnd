@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import axios from 'axios'
+
 import './Login.css'
 
 import Header from '../components/Header'
@@ -14,26 +16,11 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://127.0.0.1:8000/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      })
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Erro ao fazer login')
-      }
-
-      // SAVE IN LocalStorage
-      localStorage.setItem('access_token', data.access)
-      localStorage.setItem('refresh_token', data.refresh)
-
-      navigate('/') // Redirect to Home Page
-    } catch (err) {
-      setError(err.message)
+      const response = await axios.post('http://127.0.0.1:8000/login/', {username, password}, { withCredentials: true })
+      alert(response.data.message)
+      window.location.href = '/user'
+    } catch (error) {
+      alert("Erro: " + (error.response?.data.error || "Senha incorreta"))
     }
   }
 
